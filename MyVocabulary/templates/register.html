@@ -1,0 +1,73 @@
+{% extends "loginlayout.html" %}
+{% block head %}
+
+    <link rel="stylesheet" href="{{ url_for('static',filename = 'register.css')}}">
+
+    <title>MyVocabulary: Sign Up</title>
+
+{% endblock %}
+{% block body %}
+
+    {% from "includes/formhelpers.html" import render_field %}
+
+    <div class="container">
+        <div class="register">
+
+            <!-- Sign Up and line -->
+            <div class="register-text">
+                <h1 class="mb-0">SIGN UP</h1>
+                <div class="d-flex justify-content-center">
+                    <hr class="w-75">
+                </div>
+            </div>
+
+            <!-- Form -->
+            <div class="mx-5 mb-3">
+                <form action="" method="post">
+                    <div class="row">
+                        <div class="col mb-3">
+                            {{ render_field(form.username, class= "form-control border-dark" , placeholder="Username") }}   
+                        </div>
+                        <div class="col mb-3">
+                            {{ render_field(form.name, class= "form-control border-dark" , placeholder="Name") }} 
+                        </div>
+                    </div>
+                    <div class="row render_field">
+                        <div class="col mb-3">
+                            <label for="">First Language:</label>
+                            {{ render_field(form.motherLanguage, class= "form-select border-dark bg-transparent text-center") }}
+                        </div>
+                        <div class="col mb-3">
+                            <label for="">Second Language:</label>
+                            {{ render_field(form.foreignLanguage, class= "form-select border-dark bg-transparent text-center") }}
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        {{ render_field(form.email, class= "form-control border-dark" , placeholder="E-mail") }}
+                    </div>
+                    <div class="mb-3">
+                        {{ render_field(form.password, class= "form-control border-dark" , placeholder="Password") }}
+                        {{ render_field(form.confirm, class= "form-control border-dark" , placeholder="Password") }}
+                    </div>
+                    <div class="register-text mb-3">
+                        <p class="mb-0">
+                            By clicking Sign Up, you agree to our Terms, Data Policy and Cookie Policy. You may receive SMS notifications from us and can opt out at any time.
+                        </p>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-dark">Sign Up</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Login link -->
+            <div class="register-text">    
+                <a href="{{ url_for('login') }}">Do you have an account ?</a>
+            </div>
+            
+        </div>
+    </div>
+
+
+
+{% endblock %}

@@ -1,0 +1,11 @@
+/*#66cceb  mavi #6b0000  bordo*/
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Macondo', cursive;
+}
+
+body{
+    background-color: rgb(17, 42, 56);
+}

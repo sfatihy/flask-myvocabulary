@@ -1,0 +1,161 @@
+{% extends "layout.html" %}
+
+{% block head %}
+
+	<link rel="stylesheet" href="{{ url_for('static',filename = 'words.css')}}">
+	<title>MyVocabulary: Words</title>
+
+{% endblock %}
+{% block body %}
+
+<div class="accordion mt-5 mx-5" id="accordion">
+	<div class="accordion-item bg-dark">
+		<h2 class="accordion-header" id="headingOne">
+		  	<button class="accordion-button bg-dark btn-outline-dark text-light fs-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+				Words to Memorize
+		  	</button>
+		</h2>
+		<div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordion">
+		  <div class="accordion-body">
+			  <div class="table-responsive">
+				<table class="table table-dark table-hover">
+					<thead class="text-center">
+						  <tr>
+							<!--<th scope="col">#</th>-->
+							<th scope="col">Word</th>
+							<th scope="col">Translated Word</th>
+							<th scope="col">Sentence</th>
+							<th scope="col">Translated Sentence</th>
+							<th scope="col">Added Date</th>
+							<th scope="col">Memorized</th>
+							<th scope="col">Eject</th>
+						  </tr>
+					</thead>
+	
+					<tbody class="text-center">
+	
+						{% for x in words %}
+	
+							{% if x.isMemorized == 0 %}
+	
+								<tr>
+									<!--<th scope="row">{{ i }}</th>-->
+									<td>{{ x.word }}
+										<span class="badge rounded-pill bg-danger">
+											{{ x.sourceLanguage }}
+										</span>
+									</td>
+									<td>{{ x.wordTranslate }}
+										<span class="badge rounded-pill bg-danger">
+											{{ x.targetLanguage }}
+										</span>
+									</td>
+									<td>{{ x.sentence }}
+										<span class="badge rounded-pill bg-danger">
+											{{ x.sourceLanguage }}
+										</span>
+									</td>
+									<td>{{ x.sentenceTranslate }}
+										<span class="badge rounded-pill bg-danger">
+											{{ x.targetLanguage }}
+										</span>
+									</td>
+									<td>{{ x.wordAddedDate.strftime("%d/%m/%Y") }} {{ x.wordAddedDate.strftime("%X") }}</td>
+									<td>
+										<form action="/word/memorize" method="post">
+											<input type="hidden" name="id" value="{{x.wordId}}">
+											<input type="submit" class="btn btn-block btn-outline-success btn-sm" value="Memorized">
+										</form>
+									</td>
+									<td>
+										<form action="/word/delete" method="post">
+											<input type="hidden" name="id" value="{{x.wordId}}">
+											<input type="submit" class="btn btn-block btn-outline-danger btn-sm" value="Delete">
+										</form>
+									</td>
+								</tr>
+	
+							{% endif %}
+						{% endfor %}
+	
+					</tbody>
+					<caption class="text-light">{{ username }}'s words</caption>
+				</table>
+			  </div>
+		  </div>
+		</div>
+	</div>
+	<div class="accordion-item bg-dark">
+		<h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+		  <button class="accordion-button bg-dark btn-outline-dark text-light fs-3 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+			Memorized
+		  </button>
+		</h2>
+		<div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+		  	<div class="accordion-body">
+				<div class="table-responsive">
+					<table class="table table-dark table-hover">
+						<thead class="text-center">
+							  <tr>
+								<!--<th scope="col">#</th>-->
+								<th scope="col">Word</th>
+								<th scope="col">Translated Word</th>
+								<th scope="col">Sentence</th>
+								<th scope="col">Translated Sentence</th>
+								<th scope="col">Added Date</th>
+								<th scope="col">Memorized Date</th>
+								<th scope="col">Eject</th>
+							  </tr>
+						</thead>
+		
+						<tbody class="text-center">
+		
+							{% for x in words %}
+		
+								{% if x.isMemorized == 1 %}
+		
+									<tr>
+										<!--<th scope="row">{{ i }}</th>-->
+										<td>{{ x.word }}
+											<span class="badge rounded-pill bg-danger">
+												{{ x.sourceLanguage }}
+											</span>
+										</td>
+										<td>{{ x.wordTranslate }}
+											<span class="badge rounded-pill bg-danger">
+												{{ x.targetLanguage }}
+											</span>
+										</td>
+										<td>{{ x.sentence }}
+											<span class="badge rounded-pill bg-danger">
+												{{ x.sourceLanguage }}
+											</span>
+										</td>
+										<td>{{ x.sentenceTranslate }}
+											<span class="badge rounded-pill bg-danger">
+												{{ x.targetLanguage }}
+											</span>
+										</td>
+										<td>{{ x.wordAddedDate.strftime("%d/%m/%Y") }} {{ x.wordAddedDate.strftime("%X") }}</td>
+										<td>{{ x.wordMemorizedDate.strftime("%d/%m/%Y") }} {{ x.wordMemorizedDate.strftime("%X") }}</td>
+										<td>
+											<form action="/word/delete" method="post">
+												<input type="hidden" name="id" value="{{x.wordId}}">
+												<input type="submit" class="btn btn-block btn-outline-danger btn-sm" value="Delete">
+											</form>
+										</td>
+									</tr>
+		
+								{% endif %}
+							{% endfor %}
+		
+						</tbody>
+						<caption class="text-light">{{ username }}'s words</caption>
+					</table>
+				</div>
+			</div>
+		</div>
+	  </div>
+</div>
+
+{% endblock %}

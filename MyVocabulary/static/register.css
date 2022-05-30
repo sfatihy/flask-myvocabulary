@@ -1,0 +1,39 @@
+body{
+    background: url(https://i.picsum.photos/id/1056/1920/1080.jpg?hmac=QYMVMuFjmtGsWKQU_ICfJkVQXngKzlZYH0YO7BbgYGY) no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+}
+
+.register{
+    height: 800px;
+    width: 500px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50% , -50%);
+}
+
+.register-text{
+    text-align: center;
+}
+
+.register-text h1{
+    font-size: 55px;
+    font-weight: 700;
+    background: black;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.register-text p{
+    font-size: 9px;
+    font-weight: 400;
+}
+
+.register div input, .register div button, .register div .render_field{
+    text-align: center;
+    background: black;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

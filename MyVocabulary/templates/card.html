@@ -1,0 +1,89 @@
+{% extends "layout.html" %}
+
+{% block head %}
+
+    <link rel="stylesheet" href="{{ url_for('static',filename = 'card.css')}}">
+	<title>MyVocabulary: Cards</title>
+
+{% endblock %}
+{% block body %}
+
+    <div class="container mt-5">
+        <div class="row">
+            {% if words %}
+                {% for x in words %}
+                    {% if x.isMemorized == 0 %}
+                        <div class="col-md-6">
+                            <div class="card text-white bg-dark mx-5 mb-4 border border-danger">
+
+                                <div class="front" style="display: block;">
+                                    <div class="card-header d-flex justify-content-center">
+                                        <h5 class="card-text">{{ x.word }}&nbsp;</h5>
+                                        <h5>
+                                            <span class="badge rounded-pill bg-danger text-dark">
+                                                {{ x.sourceLanguage }}
+                                            </span>
+                                        </h5>
+                                    </div>
+                                    <div class="card-body d-flex justify-content-center middle">
+                                        <h5 class="card-text text-danger">{{ x.sentence }}</h5>
+                                    </div>
+                                    <div class="card-footer footer1 d-flex justify-content-center">
+                                        <svg width="4em" height="2em" viewBox="0 0 16 16" class="bi bi-arrow-repeat" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"/>
+                                            <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+            
+                                <div class="back" style="display: none;">
+                                    <div class="card-header d-flex justify-content-center ">
+                                        <h5 class="card-text">{{x.wordTranslate}}&nbsp;</h5>
+                                        <h5>
+                                            <span class="badge rounded-pill bg-danger text-dark">
+                                                {{ x.targetLanguage }}
+                                            </span>
+                                        </h5>
+                                    </div>
+                                    <div class="card-body d-flex justify-content-center bg-dark">
+                                        <h5 class="card-text text-danger">{{x.sentenceTranslate}}</h5>
+                                    </div>
+                                    <div class="row card-footer footer2">
+                                        <div class="col-4"></div>
+                                        <svg width="4em" height="2em" viewBox="0 0 16 16" class="bi bi-arrow-repeat col-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"/>
+                                            <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"/>
+                                        </svg>
+                                        <a href="/cardmemorize/{{x.wordId}}" class="btn btn-success btn-sm col-4">Memorized</a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+
+    <script>
+        $(".footer1 svg").click(function () {
+            //$(".card-footer2").parent().css("display","block");
+            $(this).parent(".card-footer").parent(".front").css("display","none");
+            $(this).parent(".card-footer").parent(".front").parent(".card").find(".back").css("display","block");
+            //$(this).parent(".card-footer").parent(".front").parent(".card").find(".back").css("transform","rotateY(180deg)");
+            //$(".back").css("display","block");
+            //$(this).$(".back").css("display","block");
+            //$(".front").css("display","none");
+            //$(".back").css("display","block");
+        });
+        $(".footer2 svg").click(function () {
+            //$(this).parent(".back").css("display","none");
+            //$(this).parent(".front").css("display","block");
+            $(this).parent(".card-footer").parent(".back").css("display","none");
+            $(this).parent(".card-footer").parent(".back").parent(".card").find(".front").css("display","block");
+        });
+    </script>
+
+
+{% endblock %}

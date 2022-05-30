@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+
+{% block head %}
+
+{% endblock %}
+{% block body %}
+
+    <div class="container table-responsive my-4">
+        {% if words %}
+            <table class="table table-striped table-dark">
+                <caption>{{ username }}'s words</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Word</th>
+						<th scope="col">Translate</th>
+						<th scope="col">Sentence</th>
+						<th scope="col">Sentence Translate</th>
+						<th scope="col">Added Date</th>
+						<th scope="col">Memorized Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+            {% for x in words %}
+                {% if x.isMemorized ==1 %}
+                    <tr>
+                        <td>{{ x.word }}
+                            <span class="badge rounded-pill bg-danger">
+                                {{ x.sourceLanguage }}
+                            </span>
+                        </td>
+                        <td>{{ x.wordTranslate }}
+                            <span class="badge rounded-pill bg-danger">
+                                {{ x.targetLanguage }}
+                            </span>
+                        </td>
+                        <td>{{ x.sentence }}</td>
+                        <td>{{ x.sentenceTranslate }}</td>
+                        <td>{{ x.wordAddedDate }}</td>  
+                        <td>{{ x.wordMemorizedDate }}</td>  
+                    </tr>
+                {% endif %}
+            {% endfor %}
+
+        {% else %}
+            <tr>
+                <td>Hiç kelime bulunmuyor</td>
+            </tr>
+
+                </tbody>
+            </table>
+        {% endif %}
+
+    </div>
+
+{% endblock %}

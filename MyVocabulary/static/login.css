@@ -1,0 +1,35 @@
+body{
+    background: url(https://i.picsum.photos/id/427/1920/1080.jpg?hmac=k-6P3n2rm-88nXWAkaBQXYs9Lc60zo0R6KWtH3TWn3U) no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    /*https://picsum.photos/1920/1080*/
+}
+
+.login{
+    height: 700px;
+    width: 400px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50% , -50%);
+}
+
+.login-text{
+    text-align: center;
+}
+
+.login-text h1{
+    font-size: 55px;
+    font-weight: 700;
+    background: linear-gradient(to right,blue,red);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.login div input, .login div button{
+    text-align: center;
+    background: linear-gradient(to right,blue,red);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
